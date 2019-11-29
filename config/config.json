@@ -1,0 +1,83 @@
+{
+    "default_plat": "github",
+    "platforms": {
+        "github": {
+            "http": "https://github.com/{user}/{repo}.git",
+            "ssh": "git@github.com:{user}/{repo}.git",
+            "prefer_url": "ssh",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "68": {
+            "http": "http://10.161.32.68/{user}/{repo}.git",
+            "ssh": "git@10.161.32.68:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "F1054460",
+            "enabled": true,
+            "reset_ignored": true
+        },
+        "69": {
+            "http": "http://10.161.32.69/{user}/{repo}.git",
+            "ssh": "git@10.161.32.69:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "F1054460",
+            "enabled": true,
+            "reset_ignored": true
+        },
+        "gitea": {
+            "http": "http://git.lonsty.me/{user}/{repo}.git",
+            "ssh": "ssh://git@cn.lonsty.me:222/{user}/{repo}.git",
+            "prefer_url": "ssh",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "gitlab": {
+            "http": "https://gitlab.com/{user}/{repo}.git",
+            "ssh": "git@gitlab.com:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "gitee": {
+            "http": "https://gitee.com/{user}/{repo}.git",
+            "ssh": "git@gitee.com:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "bitbucket": {
+            "http": "https://{user}@bitbucket.org/{user}/{repo}.git",
+            "ssh": "git@bitbucket.org:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "coding": {
+            "http": "https://dev.tencent.com/u/{user}/p/{repo}",
+            "prefer_url": "http",
+            "enabled": false,
+            "reset_ignored": false
+        },
+        "e-coding": {
+            "http": "https://e.coding.net/{user}/{repo}.git",
+            "ssh": "git@e.coding.net:{user}/{repo}.git",
+            "prefer_url": "http",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        },
+        "sourceforge": {
+            "http": "https://{user}@git.code.sf.net/p/{repo}/code",
+            "ssh": "ssh://{user}@git.code.sf.net/p/{repo}/code",
+            "prefer_url": "http",
+            "user": "lonsty",
+            "enabled": true,
+            "reset_ignored": false
+        }
+    }
+}
