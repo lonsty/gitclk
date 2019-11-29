@@ -2,8 +2,8 @@
 # Create new repository on github by user and repo.
 function github-create() {
     if [[ $# < 1 || ${1} == "-h" || ${1} == "--help" || $# > 2 ]]; then
-        echo "Usage: github-create <repository>"
-        echo "       github-create <user> <repository>"
+        echo "Usage: gitclk-create <repository>"
+        echo "       gitclk-create <user> <repository>"
         exit 0
     fi
 
