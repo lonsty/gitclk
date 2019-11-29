@@ -29,7 +29,7 @@ def save_settings(file, config):
         f.write(json.dumps(config, ensure_ascii=False, indent=4))
 
 
-def set_remotes():
+def set_config():
     git_platforms = load_settings(CONFIG)
     all_platforms = git_platforms.get('platforms')
 
@@ -68,7 +68,7 @@ def set_remotes():
     save_settings(CONFIG, git_platforms)
 
 
-def add_remotes(add_all, repository):
+def set_remotes_config(add_all, repository):
     if not os.path.isfile(GIT_CONFIG):
         print('Exit: current working directory is not the root directory of repository!')
         return
@@ -135,19 +135,19 @@ def config(edit):
         os.system(f'vi {CONFIG}')
         sys.exit(0)
 
-    set_remotes()
+    set_config()
 
 
-@click.command('add', help='Add remotes setting to git config.')
+@click.command('set', help='Add remotes setting to git config.')
 @click.option('-a', '--all', 'add_all', is_flag=True, default=False, show_default=True,
               help='Add all remotes include ignored.')
 @click.option('-n' , '--repository-name', 'repo', required=True, help='The repository name.')
-def app_config(add_all, repo):
-    add_remotes(add_all, repo)
+def set_remotes(add_all, repo):
+    set_remotes_config(add_all, repo)
 
 
 cli.add_command(config)
-cli.add_command(app_config)
+cli.add_command(set_remotes)
 
 
 if __name__ == '__main__':
