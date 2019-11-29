@@ -1,6 +1,6 @@
 # Git CLK
 
-Git Command Line Kit, aim to make it easier to use git from the command line.
+Git Command Line Kit, make it easier to use git from the command line.
 
 Features:
 - [x] Quick add all git platforms remote settings to git config.
@@ -35,7 +35,7 @@ $ gitclk-remotes config
 b. Add all Configured git platforms to git config
 
 ```shell script
-$ gitclk-remotes add -n repository-name
+$ gitclk-remotes add -n <repository-name>
 ```
 
 #### 2. `gitclk-create`
@@ -57,13 +57,12 @@ $ ./uninstall.sh
 #### Help
 
 ```shell script
-$ git-remotes --help
-$ git-create --help
+$ gitclk-remotes --help
+$ gitclk-create --help
 ```
 
 #### Author
 
 - [Allen Shaw](http://github.com/lonsty)
 
-#### Changelog
-
+#### [Changelog](CHANGELOG.md)
