@@ -1,31 +1,49 @@
-# Git Remotes Setting
+# Git CLK
 
-Quick add all git platforms remote settings to git config.
+Git Command Line Kit, aim to make it easier to use git from the command line.
+
+Features:
+- [x] Quick add all git platforms remote settings to git config.
+- [x] Create github repository from command line.
 
 ## Quickstart
 
-#### Clone & Install
+Clone & Install
 
 ```shell script
-$ git clone https://github.com/lonsty/git-remotes-setting.git
-$ cd git-remotes-settting
+$ git clone https://github.com/lonsty/gitclk.git
+$ cd gitclk
 
 $ ./install.sh
 ```
 
-#### Configure git platforms
+### Commands
+
+#### 1. `gitclk-remotes`
+
+Quick add all git platforms remote settings to git config.
+
+a. Configure git platforms
 
 ```shell script
-$ git-remotes config -e
+$ gitclk-remotes config -e
 
 # or
-$ git-remotes config
+$ gitclk-remotes config
 ```
 
-#### Add all Configured git platforms to git config
+b. Add all Configured git platforms to git config
 
 ```shell script
-$ git-remotes add -n repository-name
+$ gitclk-remotes add -n repository-name
+```
+
+#### 2. `gitclk-create`
+
+Create github repository from command line.
+
+```shell script
+$ gitclk-create <user> <repository>
 ```
 
 ## Others
@@ -40,4 +58,12 @@ $ ./uninstall.sh
 
 ```shell script
 $ git-remotes --help
+$ git-create --help
 ```
+
+#### Author
+
+- [Allen Shaw](http://github.com/lonsty)
+
+#### Changelog
+

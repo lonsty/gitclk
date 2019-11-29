@@ -13,8 +13,8 @@ from dialog import Dialog
 
 __author__ = 'Allen Shaw'
 __version__ = '0.1.0'
-CONFIG = os.path.expanduser('~/.config/git-remotes-setting/config/config.json')
-TEMPERATE_CONFIG = os.path.expanduser('~/.config/git-remotes-setting/config/temperate.json')
+CONFIG = os.path.expanduser('~/.config/git-clk/config/config.json')
+TEMPERATE_CONFIG = os.path.expanduser('~/.config/git-clk/config/temperate.json')
 GIT_CONFIG = '.git/config'
 
 
