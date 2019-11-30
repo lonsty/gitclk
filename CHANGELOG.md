@@ -4,5 +4,5 @@
 
 Features:
 
-- Quick add all git platforms remote settings to git config.
+- Quick set all git platforms remote settings to git config.
 - Create github repository from command line.

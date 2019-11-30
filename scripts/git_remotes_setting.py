@@ -13,8 +13,8 @@ from dialog import Dialog
 
 __author__ = 'Allen Shaw'
 __version__ = '0.1.0'
-CONFIG = os.path.expanduser('~/.config/git-clk/config/config.json')
-TEMPERATE_CONFIG = os.path.expanduser('~/.config/git-clk/config/temperate.json')
+CONFIG = os.path.expanduser('~/.config/gitclk/config/config.json')
+TEMPERATE_CONFIG = os.path.expanduser('~/.config/gitclk/config/temperate.json')
 GIT_CONFIG = '.git/config'
 
 
@@ -68,7 +68,7 @@ def set_config():
     save_settings(CONFIG, git_platforms)
 
 
-def set_remotes_config(add_all, repository):
+def set_remotes_config(set_all, repository):
     if not os.path.isfile(GIT_CONFIG):
         print('Exit: current working directory is not the root directory of repository!')
         return
@@ -100,7 +100,7 @@ def set_remotes_config(add_all, repository):
     config = configparser.ConfigParser()
     config.read(GIT_CONFIG)
 
-    if add_all is not True:
+    if set_all is not True:
         for section in sections_ignored:
             try:
                 for k, v in config[section].items():
@@ -138,17 +138,16 @@ def config(edit):
     set_config()
 
 
-@click.command('set', help='Add remotes setting to git config.')
-@click.option('-a', '--all', 'add_all', is_flag=True, default=False, show_default=True,
-              help='Add all remotes include ignored.')
-@click.option('-n' , '--repository-name', 'repo', required=True, help='The repository name.')
-def set_remotes(add_all, repo):
-    set_remotes_config(add_all, repo)
+@click.command('set', help='Set remotes setting to git config.')
+@click.option('-a', '--all', 'set_all', is_flag=True, default=False, show_default=True,
+              help='Set all remotes include ignored.')
+@click.option('-n', '--repository-name', 'repo', required=True, help='The repository name.')
+def set_remotes(set_all, repo):
+    set_remotes_config(set_all, repo)
 
 
 cli.add_command(config)
 cli.add_command(set_remotes)
-
 
 if __name__ == '__main__':
     cli()
