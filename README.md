@@ -3,9 +3,9 @@
 Git Command Line Kit, make it easier to use git from the command line.
 
 Features:
-- [x] [Quick set all git platforms remote settings](user-content-2-gitclk-remotes).
-- [x] [Create github repository from command line](user-content-2-gitclk-create).
-- [x] [Git push all branchs/tags to all remotes](user-content-2-git-pushallpushalltags).
+- [x] [Quick set all git platforms remote settings](#1-gitclk-remotes).
+- [x] [Create github repository from command line](#2-gitclk-create).
+- [x] [Git push all branchs/tags to all remotes](#3-git-pushallpushalltags).
 
 ## Quickstart
 
