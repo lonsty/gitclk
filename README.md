@@ -19,7 +19,7 @@ $ ./install.sh
 
 ### Commands
 
-#### 1. `gitclk-remotes`
+#### 1. *gitclk-remotes*
 
 Quick set all git platforms remote settings to git config.
 
@@ -38,7 +38,7 @@ b. Set all Configured git platforms to git config
 $ gitclk-remotes set -n <repository-name>
 ```
 
-#### 2. `gitclk-create`
+#### 2. *gitclk-create*
 
 Create github repository from command line.
 

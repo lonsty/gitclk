@@ -5,6 +5,7 @@ import configparser
 import json
 import locale
 import os
+import re
 import sys
 from collections import OrderedDict
 
@@ -12,10 +13,9 @@ import click
 from dialog import Dialog
 
 __author__ = 'Allen Shaw'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 CONFIG = os.path.expanduser('~/.config/gitclk/config/config.json')
 TEMPERATE_CONFIG = os.path.expanduser('~/.config/gitclk/config/temperate.json')
-GIT_CONFIG = '.git/config'
 
 
 def load_settings(file):
@@ -29,50 +29,89 @@ def save_settings(file, config):
         f.write(json.dumps(config, ensure_ascii=False, indent=4))
 
 
+def check_repository():
+    dirs = os.getcwd().split(r'/')
+    for i in range(len(dirs), 0, -1):
+        repo = f"{'/'.join(dirs[:i])}/.git"
+        if os.path.isdir(repo):
+            return os.path.join(repo, 'config')
+    return False
+
+
 def set_config():
     git_platforms = load_settings(CONFIG)
     all_platforms = git_platforms.get('platforms')
 
-    locale.setlocale(locale.LC_ALL, '')
+    try:
+        locale.setlocale(locale.LC_ALL, '')
+    except Exception:
+        pass
     d = Dialog(dialog="dialog")
 
     platforms_to_enable = [(p, '', all_platforms.get(p).get('enabled')) for p in all_platforms.keys()]
-    code, enabled_plats = d.checklist("Which git platforms do you want to use?",
+    code, enabled_plats = d.checklist("Git platforms to use ...",
                                       choices=platforms_to_enable,
                                       title="Enable Git Platforms",
                                       height=20, width=75, list_height=15)
     if code != d.OK:
         return
 
-    enabled_to_default = [(p, '', p == git_platforms.get('default_plat')) for p in enabled_plats]
-    code, default_palt = d.radiolist("Please select a default platforms:",
-                                     choices=enabled_to_default,
-                                     title="Set Default Platform",
-                                     height=20, width=75, list_height=15)
+    proxies_to_disabled = [(p, '', all_platforms.get(p).get('prefer_ssh')) for p in enabled_plats]
+    code, ssh_plats = d.checklist("Platforms to use SSH ...",
+                                  choices=proxies_to_disabled,
+                                  title="Select Platforms Use SSH",
+                                  height=20, width=75, list_height=15)
     if code != d.OK:
         return
 
     enabled_to_ignore = [(p, '', all_platforms.get(p).get('reset_ignored')) for p in enabled_plats]
-    code, ignored_plats = d.checklist("Please select platforms to ignore when reset？",
+    code, ignored_plats = d.checklist("Platforms to ignore when reset ...",
                                       choices=enabled_to_ignore,
                                       title="Select Ignore Platforms",
                                       height=20, width=75, list_height=15)
     if code != d.OK:
         return
 
-    git_platforms['default'] = default_palt
+    proxies_to_disabled = [(p, '', all_platforms.get(p).get('no_proxy')) for p in enabled_plats]
+    code, noproxy_plats = d.checklist("Platforms do not require proxy ...",
+                                      choices=proxies_to_disabled,
+                                      title="Select no-proxy Platforms",
+                                      height=20, width=75, list_height=15)
+    if code != d.OK:
+        return
+
+    enabled_to_default = [(p, '', p == git_platforms.get('default_plat')) for p in enabled_plats]
+    code, default_palt = d.radiolist("Default platforms ...",
+                                     choices=enabled_to_default,
+                                     title="Set Default Platform",
+                                     height=20, width=75, list_height=15)
+    if code != d.OK:
+        return
+
+    git_platforms['default_plat'] = default_palt
     for p in all_platforms:
+        git_platforms['platforms'][p]['prefer_ssh'] = True if p in ssh_plats else False
         git_platforms['platforms'][p]['enabled'] = True if p in enabled_plats else False
         git_platforms['platforms'][p]['reset_ignored'] = True if p in ignored_plats else False
+        git_platforms['platforms'][p]['no_proxy'] = True if p in noproxy_plats else False
 
     save_settings(CONFIG, git_platforms)
 
+    with open(GIT_CONFIG) as f:
+        config = f.read()
+    find_url = re.search(r'url\s*=\s*.*?\n', config)
+    url = find_url.group() if find_url else ''
+    find_repo = re.search(r'(?<=(/))\w*?(?=(.git\n|\n))', url)
+    ori_repo = find_repo.group() if find_repo else ''
+
+    code, repo = d.inputbox('Enter a repository ...\n\nThen click <OK> to apply changes, <Cancel> to exit.',
+                            init=ori_repo,
+                            height=20, width=75)
+    if (code == d.OK) and repo:
+        set_remotes_config(False, repo)
+
 
 def set_remotes_config(set_all, repository):
-    if not os.path.isfile(GIT_CONFIG):
-        print('Exit: current working directory is not the root directory of repository!')
-        return
-
     git_platforms = load_settings(CONFIG)
 
     platforms = git_platforms.get('platforms')
@@ -81,14 +120,20 @@ def set_remotes_config(set_all, repository):
 
     remotes = {
         f'remote "{p}"': {
-            'url': platforms.get(p).get(platforms.get(p).get('prefer_url')) \
+            'url': platforms.get(p).get('ssh' if platforms.get(p).get('prefer_ssh') else 'http') \
                 .format(user=platforms.get(p).get('user'), repo=repository),
             'fetch': '+refs/heads/*:refs/remotes/{remote_name}/*'.format(remote_name=p)
         }
         for p in [p for p in platforms if platforms[p].get('enabled') is True]
     }
+
+    # set no proxy
+    for p in [p for p in platforms if platforms[p].get('enabled') is True]:
+        if platforms[p].get('no_proxy') is True:
+            remotes[f'remote "{p}"']['proxy'] = '""'
+
     remotes['remote "origin"'] = {
-        'url': platforms.get(default_plat).get(platforms.get(default_plat).get('prefer_url')) \
+        'url': platforms.get(default_plat).get('ssh' if platforms.get(p).get('prefer_ssh') else 'http') \
             .format(user=platforms.get(default_plat).get('user'), repo=repository),
         'fetch': '+refs/heads/*:refs/remotes/origin/*'
     }
@@ -150,4 +195,9 @@ cli.add_command(config)
 cli.add_command(set_remotes)
 
 if __name__ == '__main__':
+    GIT_CONFIG = check_repository()
+    if GIT_CONFIG is False:
+        click.echo('fatal: not in a git directory')
+        sys.exit(1)
+
     cli()

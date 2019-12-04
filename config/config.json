@@ -4,80 +4,100 @@
         "github": {
             "http": "https://github.com/{user}/{repo}.git",
             "ssh": "git@github.com:{user}/{repo}.git",
-            "prefer_url": "ssh",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "68": {
             "http": "http://10.161.32.68/{user}/{repo}.git",
             "ssh": "git@10.161.32.68:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "F1054460",
             "enabled": true,
-            "reset_ignored": true
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "69": {
             "http": "http://10.161.32.69/{user}/{repo}.git",
             "ssh": "git@10.161.32.69:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "F1054460",
+            "enabled": false,
+            "reset_ignored": false,
+            "no_proxy": false
+        },
+        "161": {
+            "http": "http://10.161.32.161/{user}/{repo}.git",
+            "ssh": "ssh://git@10.161.32.161:222/{user}/{repo}.git",
+            "prefer_ssh": false,
+            "user": "lonsty",
             "enabled": true,
-            "reset_ignored": true
+            "reset_ignored": false,
+            "no_proxy": true
         },
         "gitea": {
             "http": "http://git.lonsty.me/{user}/{repo}.git",
             "ssh": "ssh://git@cn.lonsty.me:222/{user}/{repo}.git",
-            "prefer_url": "ssh",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "gitlab": {
             "http": "https://gitlab.com/{user}/{repo}.git",
             "ssh": "git@gitlab.com:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "gitee": {
             "http": "https://gitee.com/{user}/{repo}.git",
             "ssh": "git@gitee.com:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "bitbucket": {
             "http": "https://{user}@bitbucket.org/{user}/{repo}.git",
             "ssh": "git@bitbucket.org:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "coding": {
             "http": "https://dev.tencent.com/u/{user}/p/{repo}",
-            "prefer_url": "http",
-            "enabled": false,
-            "reset_ignored": false
+            "ssh": "git@git.dev.tencent.com:{user}/{repo}.git",
+            "prefer_ssh": true,
+            "enabled": true,
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "e-coding": {
             "http": "https://e.coding.net/{user}/{repo}.git",
             "ssh": "git@e.coding.net:{user}/{repo}.git",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": false,
+            "no_proxy": false
         },
         "sourceforge": {
             "http": "https://{user}@git.code.sf.net/p/{repo}/code",
             "ssh": "ssh://{user}@git.code.sf.net/p/{repo}/code",
-            "prefer_url": "http",
+            "prefer_ssh": true,
             "user": "lonsty",
             "enabled": true,
-            "reset_ignored": false
+            "reset_ignored": true,
+            "no_proxy": false
         }
     }
 }
