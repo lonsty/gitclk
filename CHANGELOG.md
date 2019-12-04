@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2019/12/04
+
+Feature:
+
+- Git push all tags to all remotes
+
 ## 2019/12/04 `0.1.1`
 
 Features:

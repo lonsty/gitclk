@@ -13,7 +13,7 @@
         "68": {
             "http": "http://10.161.32.68/{user}/{repo}.git",
             "ssh": "git@10.161.32.68:{user}/{repo}.git",
-            "prefer_ssh": true,
+            "prefer_ssh": false,
             "user": "F1054460",
             "enabled": true,
             "reset_ignored": false,
@@ -22,7 +22,7 @@
         "69": {
             "http": "http://10.161.32.69/{user}/{repo}.git",
             "ssh": "git@10.161.32.69:{user}/{repo}.git",
-            "prefer_ssh": true,
+            "prefer_ssh": false,
             "user": "F1054460",
             "enabled": false,
             "reset_ignored": false,
