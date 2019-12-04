@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## 2019/12/04
+## 2019/12/04 `0.1.1`
 
 Features:
 
+- Git push all branchs to all remotes
 - Enable no proxy setting
 - Enable prefer ssh setting
 - Enable run command anywhere in a git directory
