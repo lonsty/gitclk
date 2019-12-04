@@ -77,6 +77,8 @@
             "http": "https://dev.tencent.com/u/{user}/p/{repo}",
             "ssh": "git@git.dev.tencent.com:{user}/{repo}.git",
             "prefer_ssh": true,
+            "user": "lonsty",
+            "enabled": true,
             "enabled": true,
             "reset_ignored": false,
             "no_proxy": false
