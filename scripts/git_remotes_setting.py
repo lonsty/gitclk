@@ -101,7 +101,7 @@ def set_config():
         config = f.read()
     find_url = re.search(r'url\s*=\s*.*?\n', config)
     url = find_url.group() if find_url else ''
-    find_repo = re.search(r'(?<=(/))\w*?(?=(.git\n|\n))', url)
+    find_repo = re.search(r'(?<=(/))[\w-]*?(?=(.git\n|\n))', url)
     ori_repo = find_repo.group() if find_repo else ''
 
     code, repo = d.inputbox('Enter a repository ...\n\nThen click <OK> to apply changes, <Cancel> to exit.',
