@@ -74,11 +74,10 @@
             "no_proxy": false
         },
         "coding": {
-            "http": "https://dev.tencent.com/u/{user}/p/{repo}",
-            "ssh": "git@git.dev.tencent.com:{user}/{repo}.git",
+            "http": "https://e.coding.net/{user}/{repo}.git",
+            "ssh": "git@e.coding.net:{user}/{repo}.git",
             "prefer_ssh": true,
-            "user": "lonsty",
-            "enabled": true,
+            "user": "lonsties",
             "enabled": true,
             "reset_ignored": false,
             "no_proxy": false
